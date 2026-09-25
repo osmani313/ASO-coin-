@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سرمایه‌پلاس | پلتفرم سرمایه‌گذاری هوشمند</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+  }
+
+  :root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --accent: #10b981;
+    --dark: #0f172a;
+    --light: #f8fafc;
+    --gray: #64748b;
+    --border: #e2e8f0;
+  }
+
+  body {
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+
+  nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .logo::before {
+    content: "◆";
+    color: var(--accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover {
+    color: var(--primary);
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(99,102,241,0.3);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--dark);
+    border: 2px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+  }
+
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--gray);
+    margin-bottom: 2rem;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-visual {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: 24px;
+    padding: 2rem;
+    color: white;
+    box-shadow: 0 30px 60px rgba(99,102,241,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-visual::before {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    top: -80px;
+    left: -80px;
+  }
+
+  .chart-placeholder {
+    height: 200px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    gap: 8px;
+    position: relative;
+  }
+
+  .bar {
+    flex: 1;
+    background: rgba(255,255,255,0.6);
+    border-radius: 4px 4px 0 0;
+    animation: grow 1.5s ease-out;
+  }
+
+  @keyframes grow {
+    from { height: 0; }
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .stat-row:last-child { border-bottom: none; }
+
+  /* ===== STATS ===== */
+  .stats {
+    background: white;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stats-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .stat-item h3 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    font-weight: 800;
+  }
+
+  .stat-item p {
+    color: var(--gray);
+    font-size: 0.95rem;
+  }
+
+  /* ===== FEATURES ===== */
+  .section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-title h2 {
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+  }
+
+  .section-title p {
+    color: var(--gray);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    border-color: var(--primary);
+  }
+
+  .feature-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+    color: white;
+  }
+
+  .feature-card h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+  }
+
+  .feature-card p {
+    color: var(--gray);
+    font-size: 0.95rem;
+  }
+
+  /* ===== PLANS ===== */
+  .plans-bg {
+    background: var(--dark);
+    color: white;
+  }
+
+  .plans-bg .section-title p { color: #94a3b8; }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .plan-card {
+    background: #1e293b;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .plan-card.featured {
+    border-color: var(--accent);
+    transform: scale(1.05);
+  }
+
+  .plan-card.featured::before {
+    content: "محبوب‌ترین";
+    position: absolute;
+    top: -12px;
+    right: 50%;
+    transform: translateX(50%);
+    background: var(--accent);
+    color: white;
+    padding: 0.25rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .plan-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .plan-price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin: 1rem 0;
+  }
+
+  .plan-price span {
+    font-size: 1rem;
+    color: #94a3b8;
+    font-weight: 400;
+  }
+
+  .plan-features {
+    list-style: none;
+    margin: 1.5rem 0;
+  }
+
+  .plan-features li {
+    padding: 0.6rem 0;
+    color: #cbd5e1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .plan-features li::before {
+    content: "✓";
+    color: var(--accent);
+    font-weight: bold;
+  }
+
+  /* ===== CTA ===== */
+  .cta {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: 24px;
+    text-align: center;
+    color: white;
+  }
+
+  .cta h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta p {
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    font-size: 1.1rem;
+  }
+
+  .cta .btn {
+    background: white;
+    color: var(--primary);
+    font-size: 1rem;
+    padding: 1rem 2rem;
+  }
+
+  .cta .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--dark);
+    color: #94a3b8;
+    padding: 3rem 2rem 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-col h4 {
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .footer-col ul {
+    list-style: none;
+  }
+
+  .footer-col ul li {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-col a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-col a:hover { color: white; }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1e293b;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .hero, .features-grid, .plans-grid, .stats-grid, .footer-content {
+      grid-template-columns: 1fr;
+    }
+    .nav-links { display: none; }
+    .hero h1 { font-size: 2rem; }
+    .plan-card.featured { transform: scale(1); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <nav>
+    <div class="logo">سرمایه‌پلاس</div>
+    <ul class="nav-links">
+      <li><a href="#features">امکانات</a></li>
+      <li><a href="#plans">پلن‌ها</a></li>
+      <li><a href="#">آموزش</a></li>
+      <li><a href="#">درباره ما</a></li>
+    </ul>
+    <a href="#" class="btn btn-primary">ورود / ثبت‌نام</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <h1>سرمایه‌گذاری هوشمند با <span>سرمایه‌پلاس</span></h1>
+    <p>پلتفرم امن و حرفه‌ای برای رشد سرمایه شما با بازدهی بالا، مدیریت ریسک پیشرفته و پشتیبانی ۲۴ ساعته.</p>
+    <div class="hero-buttons">
+      <a href="#" class="btn btn-primary">شروع سرمایه‌گذاری</a>
+      <a href="#" class="btn btn-outline">مشاهده دمو</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="chart-placeholder">
+      <div class="bar" style="height: 40%"></div>
+      <div class="bar" style="height: 60%"></div>
+      <div class="bar" style="height: 45%"></div>
+      <div class="bar" style="height: 80%"></div>
+      <div class="bar" style="height: 70%"></div>
+      <div class="bar" style="height: 95%"></div>
+      <div class="bar" style="height: 85%"></div>
+    </div>
+    <div class="stat-row"><span>موجودی کل</span><strong>۱۲۰,۰۰۰,۰۰۰ تومان</strong></div>
+    <div class="stat-row"><span>سود امروز</span><strong style="color:#10b981">+۱.۲٪</strong></div>
+    <div class="stat-row"><span>سود ماهانه</span><strong style="color:#10b981">+۱۸.۵٪</strong></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat-item"><h3>+۵۰K</h3><p>کاربر فعال</p></div>
+    <div class="stat-item"><h3>+۲۵٪</h3><p>میانگین بازدهی سالانه</p></div>
+    <div class="stat-item"><h3>۹۹.۹٪</h3><p>آپ‌تایم سرور</p></div>
+    <div class="stat-item"><h3>۲۴/۷</h3><p>پشتیبانی</p></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-title">
+    <h2>چرا سرمایه‌پلاس؟</h2>
+    <p>ابزارهای حرفه‌ای برای مدیریت و رشد سرمایه شما در یک پلتفرم امن</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <h3>امنیت بالا</h3>
+      <p>رمزنگاری پیشرفته و احراز هویت دو مرحله‌ای برای محافظت کامل از دارایی‌های شما.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📈</div>
+      <h3>بازدهی بالا</h3>
+      <p>استراتژی‌های سرمایه‌گذاری متنوع با میانگین بازدهی سالانه تا ۲۵ درصد.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3>برداشت سریع</h3>
+      <p>برداشت وجه در کمتر از ۲۴ ساعت و بدون کارمزد پنهان.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>گزارش لحظه‌ای</h3>
+      <p>داشبورد حرفه‌ای با نمودارهای تحلیلی و گزارش سود و زیان لحظه‌ای.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">👥</div>
+      <h3>مشاور اختصاصی</h3>
+      <p>تیم کارشناسان مجرب برای راهنمایی شما در انتخاب بهترین استراتژی.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <h3>مدیریت ریسک</h3>
+      <p>سیستم هوشمند تخصیص دارایی برای به حداقل رساندن ریسک سرمایه‌گذاری.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section class="plans-bg" id="plans">
+  <div class="section">
+    <div class="section-title">
+      <h2>پلن‌های سرمایه‌گذاری</h2>
+      <p>پلنی را انتخاب کنید که با اهداف مالی شما هماهنگ است</p>
+    </div>
+    <div class="plans-grid">
+      <div class="plan-card">
+        <h3>پایه</h3>
+        <div class="plan-price">۱۰٪ <span>سود سالانه</span></div>
+        <ul class="plan-features">
+          <li>حداقل سرمایه: ۱ میلیون تومان</li>
+          <li>برداشت در ۷ روز کاری</li>
+          <li>پشتیبانی ایمیلی</li>
+          <li>گزارش ماهانه</li>
+        </ul>
+        <a href="#" class="btn btn-outline" style="width:100%;text-align:center;color:white;border-color:#334155">انتخاب پلن</a>
+      </div>
+      <div class="plan-card featured">
+        <h3>حرفه‌ای</h3>
+        <div class="plan-price">۱۸٪ <span>سود سالانه</span></div>
+        <ul class="plan-features">
+          <li>حداقل سرمایه: ۱۰ میلیون تومان</li>
+          <li>برداشت در ۲۴ ساعت</li>
+          <li>مشاور اختصاصی</li>
+          <li>گزارش هفتگی</li>
+          <li>دسترسی به تحلیل‌ها</li>
+        </ul>
+        <a href="#" class="btn btn-primary" style="width:100%;text-align:center">شروع کنید</a>
+      </div>
+      <div class="plan-card">
+        <h3>VIP</h3>
+        <div class="plan-price">۲۵٪ <span>سود سالانه</span></div>
+        <ul class="plan-features">
+          <li>حداقل سرمایه: ۱۰۰ میلیون تومان</li>
+          <li>برداشت فوری</li>
+          <li>مدیر پرتفوی اختصاصی</li>
+          <li>گزارش روزانه</li>
+          <li>دسترسی به رویدادها</li>
+        </ul>
+        <a href="#" class="btn btn-outline" style="width:100%;text-align:center;color:white;border-color:#334155">تماس با ما</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <h2>همین امروز سرمایه‌گذاری را شروع کنید</h2>
+  <p>ثبت‌نام در کمتر از ۲ دقیقه • بدون کارمزد اولیه • پشتیبانی رایگان</p>
+  <a href="#" class="btn">ایجاد حساب رایگان</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-col">
+      <div class="logo" style="color:white;margin-bottom:1rem">سرمایه‌پلاس</div>
+      <p>پلتفرم سرمایه‌گذاری هوشمند برای رشد پایدار دارایی شما با امنیت کامل.</p>
+    </div>
+    <div class="footer-col">
+      <h4>محصولات</h4>
+      <ul>
+        <li><a href="#">سرمایه‌گذاری</a></li>
+        <li><a href="#">وام</a></li>
+        <li><a href="#">بیمه</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>شرکت</h4>
+      <ul>
+        <li><a href="#">درباره ما</a></li>
+        <li><a href="#">تماس</a></li>
+        <li><a href="#">فرصت‌های شغلی</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>پشتیبانی</h4>
+      <ul>
+        <li><a href="#">سوالات متداول</a></li>
+        <li><a href="#">قوانین</a></li>
+        <li><a href="#">حریم خصوصی</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © ۱۴۰۴ سرمایه‌پلاس — تمامی حقوق محفوظ است.
+  </div>
+</footer>
+
+<script>
+  // اسکرول نرم برای لینک‌های داخلی
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // انیمیشن شمارنده آمار
+  const animateStats = () => {
+    document.querySelectorAll('.stat-item h3').forEach(el => {
+      el.style.opacity = 0;
+      setTimeout(() => {
+        el.style.transition = 'opacity 0.8s';
+        el.style.opacity = 1;
+      }, 200);
+    });
+  };
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateStats();
+        observer.disconnect();
+      }
+    });
+  });
+
+  observer.observe(document.querySelector('.stats'));
+</script>
+</body>
+</html>
