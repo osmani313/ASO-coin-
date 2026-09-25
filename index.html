@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Crypto Demo Dashboard</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#0b1020;color:#eef2ff}
+header{padding:18px 20px;background:#111936;border-bottom:1px solid #28345d;display:flex;justify-content:space-between}
+.badge{background:#f59e0b;color:#111;padding:6px 10px;border-radius:20px;font-size:12px;font-weight:bold}
+.wrap{max-width:1050px;margin:auto;padding:20px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{background:#121a35;border:1px solid #29365f;border-radius:16px;padding:18px;margin-bottom:14px}
+.label{color:#aeb9d8;font-size:13px}.value{font-size:25px;font-weight:bold;margin-top:8px}.positive{color:#4ade80}
+.chart{height:190px;overflow:hidden;border-radius:12px;background:#182345}.chart svg{width:100%;height:100%}
+.tabs{display:flex;gap:8px;margin-bottom:15px;flex-wrap:wrap}button{border:0;border-radius:10px;padding:11px 16px;background:#6366f1;color:white}
+.panel{display:none}.panel.active{display:block}
+.login{max-width:420px;margin:60px auto}.login input,.admininput{width:100%;padding:13px;margin:7px 0;border-radius:10px;border:1px solid #34446f;background:#0d1430;color:white}
+.notice{margin-top:18px;padding:14px;border-radius:12px;background:#2a210e;border:1px solid #73570f;color:#f8df8a;line-height:1.8;font-size:13px}
+table{width:100%;border-collapse:collapse}th,td{padding:12px;text-align:right;border-bottom:1px solid #28345d;font-size:13px}th{color:#aeb9d8}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.grid{grid-template-columns:1fr}.wrap{padding:12px}}
+</style></head>
+<body>
+<div id="login" class="wrap login"><div class="card">
+<h2>ورود به Crypto Demo</h2><p class="label">این حساب کاملاً آزمایشی است.</p>
+<input id="user" placeholder="نام کاربری"><input id="pass" type="password" placeholder="رمز عبور">
+<button onclick="login()">ورود آزمایشی</button>
+<div class="notice">هیچ پول، ارز دیجیتال یا کیف‌پول واقعی در این نسخه وجود ندارد.</div>
+</div></div>
+
+<div id="app" style="display:none"><header><b>Crypto Demo</b><span class="badge">DEMO • بدون پول واقعی</span></header>
+<div class="wrap"><div class="tabs">
+<button onclick="show('dashboard')">داشبورد</button><button onclick="show('trades')">معاملات</button>
+<button onclick="show('admin')">مدیریت دمو</button><button onclick="logout()">خروج</button></div>
+
+<section id="dashboard" class="panel active"><div class="grid">
+<div class="card"><div class="label">سرمایه فرضی</div><div class="value">$1,000.00</div></div>
+<div class="card"><div class="label">ارزش فعلی فرضی</div><div class="value">$1,072.40</div></div>
+<div class="card"><div class="label">سود/زیان فرضی</div><div class="value positive">+$72.40</div></div>
+<div class="card"><div class="label">بازده فرضی</div><div class="value positive">+7.24%</div></div>
+</div><div class="card"><h2>نمودار سرمایه فرضی</h2><div class="chart">
+<svg viewBox="0 0 800 190" preserveAspectRatio="none"><polyline points="0,155 80,145 160,150 240,125 320,135 400,95 480,110 560,75 640,88 720,48 800,60" fill="none" stroke="#7c83ff" stroke-width="5"/></svg>
+</div></div></section>
+
+<section id="trades" class="panel"><div class="card"><h2>تاریخچه معاملات آزمایشی</h2>
+<table><thead><tr><th>دارایی</th><th>نوع</th><th>ورود</th><th>فعلی</th><th>نتیجه</th></tr></thead>
+<tbody id="tradeBody"><tr><td>BTC</td><td>Long</td><td>$60,000</td><td>$61,200</td><td class="positive">+$20</td></tr>
+<tr><td>ETH</td><td>Long</td><td>$2,900</td><td>$2,980</td><td class="positive">+$27</td></tr>
+<tr><td>SOL</td><td>Long</td><td>$110</td><td>$116</td><td class="positive">+$25.40</td></tr></tbody></table></div></section>
+
+<section id="admin" class="panel"><div class="card"><h2>پنل مدیریت دمو</h2>
+<p class="label">یک معامله فرضی اضافه کن.</p><input class="admininput" id="coin" placeholder="مثلاً BTC">
+<input class="admininput" id="result" placeholder="مثلاً +15.00"><button onclick="addTrade()">افزودن معامله فرضی</button>
+<div class="notice">این بخش فقط آموزشی است و به صرافی، بانک، کیف‌پول یا پرداخت واقعی متصل نیست.</div></div></section>
+</div></div>
+<script>
+function login(){loginBox(false);app.style.display='block'}
+function logout(){app.style.display='none';loginBox(true)}
+function loginBox(v){document.getElementById('login').style.display=v?'block':'none'}
+function show(id){document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active')}
+function addTrade(){let c=coin.value.trim().toUpperCase(),r=result.value.trim();if(!c||!r){alert('نام ارز و نتیجه را وارد کن');return}let tr=document.createElement('tr');tr.innerHTML='<td>'+c+'</td><td>Demo</td><td>فرضی</td><td>فرضی</td><td class="positive">'+r+'</td>';tradeBody.appendChild(tr);coin.value='';result.value=''}
+</script></body></html>
